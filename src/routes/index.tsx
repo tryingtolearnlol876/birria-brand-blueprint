@@ -31,6 +31,8 @@ export const Route = createFileRoute("/")({
 function Home() {
   const next = upcoming[0];
 
+  if (!next) return null;
+
   return (
     <>
       <section className="relative isolate flex min-h-[88vh] items-end overflow-hidden">

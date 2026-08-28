@@ -11,6 +11,8 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BookingRouteImport } from './routes/booking'
+import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as MenuRouteImport } from './routes/menu'
 import { Route as ScheduleRouteImport } from './routes/schedule'
 
@@ -22,6 +24,16 @@ const IndexRoute = IndexRouteImport.update({
 const AboutRoute = AboutRouteImport.update({
   id: '/about',
   path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalleryRoute = GalleryRouteImport.update({
+  id: '/gallery',
+  path: '/gallery',
   getParentRoute: () => rootRouteImport,
 } as any)
 const MenuRoute = MenuRouteImport.update({
@@ -38,12 +50,16 @@ const ScheduleRoute = ScheduleRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/schedule': typeof ScheduleRoute
 }
@@ -51,20 +67,31 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
+  '/gallery': typeof GalleryRoute
   '/menu': typeof MenuRoute
   '/schedule': typeof ScheduleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/menu' | '/schedule'
+  fullPaths: '/' | '/about' | '/booking' | '/gallery' | '/menu' | '/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/menu' | '/schedule'
-  id: '__root__' | '/' | '/about' | '/menu' | '/schedule'
+  to: '/' | '/about' | '/booking' | '/gallery' | '/menu' | '/schedule'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/gallery'
+    | '/menu'
+    | '/schedule'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BookingRoute: typeof BookingRoute
+  GalleryRoute: typeof GalleryRoute
   MenuRoute: typeof MenuRoute
   ScheduleRoute: typeof ScheduleRoute
 }
@@ -83,6 +110,20 @@ declare module '@tanstack/react-router' {
       path: '/about'
       fullPath: '/about'
       preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/gallery': {
+      id: '/gallery'
+      path: '/gallery'
+      fullPath: '/gallery'
+      preLoaderRoute: typeof GalleryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/menu': {
@@ -105,6 +146,8 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BookingRoute: BookingRoute,
+  GalleryRoute: GalleryRoute,
   MenuRoute: MenuRoute,
   ScheduleRoute: ScheduleRoute,
 }

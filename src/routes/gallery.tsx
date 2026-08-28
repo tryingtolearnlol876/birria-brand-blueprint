@@ -28,7 +28,7 @@ function Gallery() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const items = filter === "All" ? galleryItems : galleryItems.filter((i) => i.category === filter);
-  const open = openIndex === null ? null : items[openIndex];
+  const open = openIndex === null ? null : (items[openIndex] ?? null);
 
   return (
     <div className="mx-auto max-w-[1400px] px-6 py-20 md:px-10 md:py-28">

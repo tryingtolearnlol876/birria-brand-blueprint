@@ -51,11 +51,11 @@ function Field({
 }: {
   label: string;
   name: string;
-  type?: string;
-  required?: boolean;
-  error?: string;
-  textarea?: boolean;
-  placeholder?: string;
+  type?: string | undefined;
+  required?: boolean | undefined;
+  error?: string | undefined;
+  textarea?: boolean | undefined;
+  placeholder?: string | undefined;
 }) {
   return (
     <div>
